@@ -1,2 +1,5 @@
 # special-waffle
-discord clone web app using react and firebase
+noted dependencies : 
+styled-components
+react-router-dom
+
