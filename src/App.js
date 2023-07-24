@@ -1,12 +1,14 @@
-import AuthenticationPage from "./pages/AuthenticationPage";
+import LandingPage from './pages/LandingPage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <>
+      <BrowserRouter>
         <Routes>
-          <Route path
+          <Route path="/" element={<LandingPage />} />
         </Routes>
-        <AuthenticationPage />
+      </BrowserRouter>
     </>
   );
 }

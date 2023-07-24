@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import { InputContainer } from '../../utils/styles/index.styled';
-
+import { InputContainer, InputLabel, InputField, SubmitButton } from '../../utils/styles/index.styled';
+import styles from './index.module.css';
 
 const RegisterForm = () => {
     const [username, setUsername] = useState('');
@@ -9,19 +9,32 @@ const RegisterForm = () => {
     const [pwdConfirmation, setConfirmation] = useState('');
 
     return (
-        <>
-            <form className="registerWrapper" id='registrationForm'>
+        <>  
+        {/* form for creating an account */}
+            <form className={styles.form}>
                 <InputContainer>
-                    <label htmlFor="">Sign Up</label>
-                    <input type="text" value={username} placeholder="Username" onChange={e => setUsername(e.target.value)} />
-                    <input type="email" value={email} placeholder="Email" onChange={e => setEmail(e.target.value)} />
-                    <input type="password" value={password} placeholder="Password" onChange={e => setPassword(e.target.value)} />
-                    <input type="password" value={pwdConfirmation} placeholder="Confirm Password" onChange={e => setConfirmation(e.target.value)} />
+                    <InputLabel htmlFor="email">Email</InputLabel>
+                    <InputField type="email" id="email" />
                 </InputContainer>
+                <section className={styles.nameFieldRow}>
+                    <InputContainer>
+                        <InputLabel htmlFor="firstName">First Name</InputLabel>
+                        <InputField type="text" id="email" />
+                    </InputContainer>
+                    <InputContainer>
+                        <InputLabel htmlFor="lastName">Last Name</InputLabel>
+                        <InputField type="text" id="lastName" />
+                    </InputContainer>
+                </section>
+                <InputContainer>
+                        <InputLabel htmlFor="password">Password</InputLabel>
+                        <InputField type="password" id="password" />
+                </InputContainer>
+                <SubmitButton className={styles.button}>Create My Account</SubmitButton>
             </form>
-            <button className="registerButton" name='register' type='submit'>Sign Up</button>
+
+            
             {/* value attribute = inital value of the button output */}
-            <p className="login">Already have an account? Login</p>
         </>
     )
 }
