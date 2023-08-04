@@ -1,5 +1,15 @@
 body {
     margin: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    /* -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; */
+}
+
+body, html, #root {
+    height: 100%;
+}
+
+body, html {
+    background-color: #1a1a1a;
+    font-family: 'Inter';
+    color: #fff;
 }

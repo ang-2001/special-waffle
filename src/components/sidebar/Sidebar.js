@@ -1,0 +1,1 @@
+// side bar should consist of: friends list, settings, user

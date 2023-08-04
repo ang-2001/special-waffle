@@ -1,16 +1,19 @@
-form {
+.form {
     width: 800px;
 }
-
 
 .nameFieldRow {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    gap: 8px;
-    margin: 8px 0;
+    gap: 0 8px;
+    /* margin: 8px 0; */
 }
 
 .button {
+    margin-bottom: 8px;
+}
+
+.passwordField {
     margin: 8px 0;
 }
