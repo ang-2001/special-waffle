@@ -72,3 +72,19 @@ export const Page = styled.div`
     align-items: center;
     justify-content: center;
 `;
+
+
+// temp 
+export const HomePageContainer = styled.div`
+    background-color: #1a1a1a;
+    height: 100%;
+`;
+
+// what is in the side bar?
+// => conversations, friends, groups(?) 
+export const NavBarStyle = styled.div`
+    background-color: #fff;
+    color: #000;
+    height: 100%;
+    width: 300px;
+`;
