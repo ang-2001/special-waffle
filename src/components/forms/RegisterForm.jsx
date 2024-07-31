@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { InputContainer, InputLabel, InputField, SubmitButton } from '../../utils/styles/index.styled';
 import styles from './index.module.css';
+import { Link } from 'react-router-dom';
 
 // component for regsiter form(page wraps arond this component)
 const RegisterForm = () => {
@@ -10,8 +11,8 @@ const RegisterForm = () => {
     };
 
     return (
-        <>  
-        {/* form for creating an account */}
+        <>
+            {/* form for creating an account */}
             <form className={styles.form} onSubmit={handleSubmit}>
                 <InputContainer>
                     <InputLabel htmlFor="email">Email</InputLabel>
@@ -28,13 +29,21 @@ const RegisterForm = () => {
                     </InputContainer>
                 </section>
                 <InputContainer>
-                        <InputLabel htmlFor="password">Password</InputLabel>
-                        <InputField type="password" id="password" />
+                    <InputLabel htmlFor="password">Password</InputLabel>
+                    <InputField type="password" id="password" />
+                </InputContainer>
+                <InputContainer>
+                    <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
+                    <InputField type="password" id="confirmPassword" />
                 </InputContainer>
                 <SubmitButton className={styles.button}>Create My Account</SubmitButton>
-                <div> 
+                <div>
                     <span>Already have an account? </span>
-                    <span>Login</span>
+                    <Link className={styles.pageLink} to="../login">
+                        <span>
+                            Login
+                        </span>
+                    </Link>
                 </div>
             </form>
 

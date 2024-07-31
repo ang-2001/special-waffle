@@ -22,6 +22,15 @@
     margin: 8px 0;
 }
 
+.pageLink {
+    color: #4493ea;
+    text-decoration: none;
+    text-shadow: 1px #0277f5;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 

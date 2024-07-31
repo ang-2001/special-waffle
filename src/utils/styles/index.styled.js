@@ -2,14 +2,14 @@ import { styled } from "styled-components";
 // stlyed component input container/wrapper
 export const InputContainer = styled.div`
     background-color: #f4efdc;
-    padding: 12px 16px;
+    padding: 8px 16px;
     border-radius: 8px;
     width: 100%;
     box-sizing: border-box;
     margin-bottom: 12px;
     transition: all 120ms ease-in-out;
     &:focus-within {
-        border-left: 8px solid #8ccbb7;
+        border-left: 8px solid #fcb606;
     }
 `;
 
@@ -64,6 +64,13 @@ export const SubmitButton = styled.button`
     }
 `;
 
+export const Header = styled.div`
+    font-family: 'vhs-bold';
+    font-size: 50px;
+    color: #f4efdc;
+    margin-bottom: 24px;
+`;
+
 // container for general page content
 export const Page = styled.div`
     background-color: #2f2f2f;
@@ -71,6 +78,7 @@ export const Page = styled.div`
     height: auto;
     min-height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 `;
