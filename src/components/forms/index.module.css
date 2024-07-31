@@ -1,5 +1,9 @@
 .form {
+    /* change the width to be resposnive later */
     width: 800px;
+    background-color: #252525;
+    padding: 20px 40px;
+    border-radius: 8px;
 }
 
 .nameFieldRow {
@@ -16,4 +20,14 @@
 
 .passwordField {
     margin: 8px 0;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-text-fill-color: black;
+    -webkit-box-shadow: 0 0 0 30px #f4efdc inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+    font-family: 'Inter';
 }

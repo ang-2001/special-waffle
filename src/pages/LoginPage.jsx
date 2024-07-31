@@ -1,6 +1,6 @@
 import React from 'react'
 import LoginForm from "../components/forms/LoginForm"
-import { Page } from "../utils/styles/index.styled"
+import { FormContainer, Page } from "../utils/styles/index.styled"
 
 const LoginPage = () => {
   return (

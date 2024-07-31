@@ -1,26 +1,26 @@
 import { styled } from "styled-components";
-
-
 // stlyed component input container/wrapper
 export const InputContainer = styled.div`
-    background-color: #131313;
+    background-color: #f4efdc;
     padding: 12px 16px;
-    border-radius: 10px;
+    border-radius: 8px;
     width: 100%;
     box-sizing: border-box;
-    margin-bottom: 8px;
-    transition: all 200ms ease-in-out;
+    margin-bottom: 12px;
+    transition: all 120ms ease-in-out;
+    &:focus-within {
+        border-left: 8px solid #8ccbb7;
+    }
 `;
 
 // styling for the input labels
 export const InputLabel = styled.label`
     display: block;
-    color: #8f8f8f;
-    font-size: 14px;
+    color: #4a3425;
+    font-family: 'vhs';
+    font-weight: bold;
+    font-size: 24px;
     margin: 4px 0;
-    &:active {
-        
-    }
 `;
 
 // styled component for form inputs
@@ -30,42 +30,44 @@ export const InputField = styled.input`
     outline: none;
     border: none;
     background-color: inherit;
-    color: #fff;
+    color: #000;
     width: 100%;
     box-sizing: border-box;
     padding: 0;
     margin: 4px 0;
+    border-bottom: 1px solid #d1cdbd
 `;
 
 export const SubmitButton = styled.button`
     width: 100%;
     outline: none;
-    background-color: #893858;
-    color: #fff;
-    font-family: 'Inter';
-    font-size: 16px;
-    font-weight: 500;
+    background-color: #8ccbb7;
+    color: #f4efdc;
+    font-family: 'vhs';
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 0.1em;
     border-radius: 10px;
     border: 2px solid transparent;
     padding: 25px 0;
+    margin-top: 8px;
     transition: 100ms background-color ease;
     &:hover {
-        background-color: #df558c;
+        background-color: #fdb604;
     }
     &:active {
-        background-color: #f14d8f;
-        box-shadow: 2px 2px 5px #b40c4f;
+        background-color: #fdb604;
+        box-shadow: 1px 1px 1px #ebd9b3;
     }
     &:focus {
-        background-color: #f15b97;
-        border: 2px solid #00a8fc;
+        background-color: #fdb604;
     }
 `;
 
-
 // container for general page content
 export const Page = styled.div`
-    background-color: #1a1a1a;
+    background-color: #2f2f2f;
+    /* background-color: #ebd9b3; */
     height: auto;
     min-height: 100%;
     display: flex;

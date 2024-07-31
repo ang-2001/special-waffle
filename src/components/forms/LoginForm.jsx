@@ -16,20 +16,20 @@ const LoginForm = () => {
             <form className={styles.form} onSubmit={handleSubmit}>
                 <InputContainer>
                     <InputLabel htmlFor="email">Email</InputLabel>
-                    <InputField type="email" id="email" />
+                    <InputField type="email" id="email" pattern="/.+/g" />
                 </InputContainer>
                 <InputContainer className={styles.passwordField}>
                     <InputLabel htmlFor="password">Password</InputLabel>
                     <InputField type="password" id="password" />
                 </InputContainer>
                 <SubmitButton className={styles.button}>Login</SubmitButton>
-                <div> 
+                <div>
                     <span>Don't have an account? </span>
                     <span>Register</span>
                 </div>
             </form>
         </>
-  )
+    )
 }
 
 export default LoginForm
