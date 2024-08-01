@@ -1,0 +1,42 @@
+.form {
+    /* change the width to be resposnive later */
+    width: 800px;
+    background-color: #252525;
+    padding: 20px 40px;
+    border-radius: 8px;
+}
+
+.nameFieldRow {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 0 8px;
+    /* margin: 8px 0; */
+}
+
+.button {
+    margin-bottom: 8px;
+}
+
+.passwordField {
+    margin: 8px 0;
+}
+
+.pageLink {
+    color: #4493ea;
+    text-decoration: none;
+    text-shadow: 1px #0277f5;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-text-fill-color: black;
+    -webkit-box-shadow: 0 0 0 30px #f4efdc inset !important;
+    transition: background-color 5000s ease-in-out 0s;
+    font-family: 'Inter';
+}
