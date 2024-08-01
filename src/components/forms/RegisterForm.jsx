@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { InputContainer, InputLabel, InputField, SubmitButton } from '../../utils/styles/index.styled';
+import { InputContainer, InputLabel, InputField, SubmitButton, TestButton } from '../../utils/styles/index.styled';
 import styles from './index.module.css';
 import { Link } from 'react-router-dom';
 
@@ -36,7 +36,8 @@ const RegisterForm = () => {
                     <InputLabel htmlFor="confirmPassword">Confirm Password</InputLabel>
                     <InputField type="password" id="confirmPassword" />
                 </InputContainer>
-                <SubmitButton className={styles.button}>Create My Account</SubmitButton>
+                {/* <SubmitButton className={styles.button}>Create My Account</SubmitButton> */}
+                <TestButton>⏵ Create Account</TestButton>
                 <div>
                     <span>Already have an account? </span>
                     <Link className={styles.pageLink} to="../login">

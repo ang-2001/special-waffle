@@ -1,11 +1,12 @@
 import React from 'react'
-import { HomePageContainer, NavBarStyle } from '../utils/styles/index.styled'
+import { HomePageContainer } from '../utils/styles/index.styled'
+import Sidebar from '../components/messages/Sidebar'
 
 // where the main app will operate
 const HomePage = () => {
   return (
     <HomePageContainer>
-      <NavBarStyle>navbar</NavBarStyle>
+      <Sidebar />
     </HomePageContainer>
     // sidebar
     // messages

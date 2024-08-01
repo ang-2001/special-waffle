@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import RegisterForm from '../components/forms/RegisterForm';
-import { Header, Page } from '../utils/styles/index.styled';
+import { PageHeader, Page } from '../utils/styles/index.styled';
 
 const RegisterPage = () => {
   // is there shorthand for this section? 
@@ -11,7 +11,7 @@ const RegisterPage = () => {
 
   return (
     <Page>
-      <Header>Register</Header>
+      <PageHeader>Register</PageHeader>
       <RegisterForm />
     </Page>
   )
