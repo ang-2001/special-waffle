@@ -121,13 +121,17 @@ export const Page = styled.div`
 export const HomePageContainer = styled.div`
     /* background-color: #1a1a1a; */
     height: 100%;
+    display: flex;
 `;
 
 // what is in the side bar?
 // => conversations, friends, groups(?) 
 export const SideBarContainer = styled.div`
     background-color: #252525;
-    color: #000;
+    color: #f4efdc;
     height: 100%;
-    width: 20em;
+    min-width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
 `;

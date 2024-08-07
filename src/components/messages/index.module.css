@@ -1,0 +1,62 @@
+.friendSection {
+    width: 100%;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    background-color: aqua;
+    border-bottom: solid white;
+    padding: 12px 0;
+}
+
+.friendHeader {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 12px;
+}
+
+.userSection {
+    margin-top: auto;
+    width: 100%;
+    padding: 12px;
+    background-color: #4a3425;
+}
+
+.messageContainer {
+    width: 100%;
+    background-color: white;
+    color:black;
+    display: flex;
+    flex-direction: column;
+    row-gap: 16px;
+    padding: 16px 16px;
+    overflow: hidden;
+}
+
+.messageInput {
+    width: 100%;
+    background-color: black;
+    color:white;
+    padding: 12px 0;
+    margin-top: auto;
+    border-radius: 10px;
+}
+
+.messageList {
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+}
+
+.searchField {
+    width: 100%;
+    padding: 8px;
+    color: white;
+    background-color: black;
+    border: none; 
+
+    &:focus {
+        /* background-color: white; */
+        border: none;
+    }
+}
