@@ -127,11 +127,12 @@ export const HomePageContainer = styled.div`
 // what is in the side bar?
 // => conversations, friends, groups(?) 
 export const SideBarContainer = styled.div`
-    background-color: #252525;
+    background-color: var(--dark-gray);
     color: #f4efdc;
     height: 100%;
     min-width: 350px;
     display: flex;
     flex-direction: column;
     align-items:center;
+    overflow: hidden;
 `;
