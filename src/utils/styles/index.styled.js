@@ -118,7 +118,7 @@ export const Page = styled.div`
 `;
 
 
-export const HomePageContainer = styled.div`
+export const MessagePageContainer = styled.div`
     /* background-color: #1a1a1a; */
     height: 100%;
     display: flex;
