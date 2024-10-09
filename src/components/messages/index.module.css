@@ -30,9 +30,12 @@ input {
 .friendHeader {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 0 8px;
 }
 
+
+/* bottom user nav with setting and logout */
 .userContainer {
     display: flex;
     align-items: center;
@@ -42,6 +45,7 @@ input {
     padding: 8px;
     box-sizing: border-box;
     background: #1d1d1d;
+    font-family: vhs;
 }
 
 .userContent {
@@ -50,6 +54,9 @@ input {
     gap: 8px;
     /* box-sizing: border-box; */
 }
+
+
+
 
 .messageSectionContainer {
     width: 100%;
@@ -101,6 +108,21 @@ input {
     overflow-y: scroll;
 }
 
+
+
+/* side bar */
+.addButton {
+    border-right: none;
+    border-radius: 10px 0 0 10px;
+    
+}
+
+
+.requestsButton {
+    border-left: none;
+    border-radius: 0 10px 10px 0;
+}
+
 .searchField {
     width: 100%;
     box-sizing: border-box;
@@ -127,11 +149,14 @@ input {
     box-sizing: border-box;
     padding: 8px;
     gap: 8px;
-    background: black;
+    background: var(--purple);
+    color: var(--display-blue);
+    text-shadow: var(--display-shadow) 2px 0 10px;
+    font-family: vhs;
     border-radius: 10px;
 
     &:hover {
-        background: var(--base-gray)
+        background: var(--light-purple)
     }
 }
 

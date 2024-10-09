@@ -15,9 +15,24 @@
     --pale: #f4efdc;
     --brown: #4a3425;
     --orange: #fcb606;
+    --gold: #eecf96;
     --base-gray: #2f2f2f;
     --dark-gray: #252525;
+    --purple: #3e1d4d;
+    --light-purple: #5c2b73;
+    --display-blue: #bcdbf9;
+    --display-shadow: #27285a;
 }
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
 
 body {
     margin: 0;

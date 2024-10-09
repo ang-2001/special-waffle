@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import styles from './index.module.css';
-import { InputContainer, InputField, InputLabel, SubmitButton } from '../../utils/styles/index.styled';
+import { InputContainer, InputField, InputLabel, SubmitButton, TestButton } from '../../utils/styles/index.styled';
 import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
@@ -23,7 +23,7 @@ const LoginForm = () => {
                     <InputLabel htmlFor="password">Password</InputLabel>
                     <InputField type="password" id="password" />
                 </InputContainer>
-                <SubmitButton className={styles.button}>Login</SubmitButton>
+                <TestButton className={styles.button}>Login</TestButton>
                 <div>
                     <span>Don't have an account? </span>
                     <Link className={styles.pageLink} to="../register">

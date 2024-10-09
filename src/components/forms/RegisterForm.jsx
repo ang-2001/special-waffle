@@ -37,7 +37,7 @@ const RegisterForm = () => {
                     <InputField type="password" id="confirmPassword" />
                 </InputContainer>
                 {/* <SubmitButton className={styles.button}>Create My Account</SubmitButton> */}
-                <TestButton>⏵ Create Account</TestButton>
+                <TestButton className={styles.button}>⏵ Create Account</TestButton>
                 <div>
                     <span>Already have an account? </span>
                     <Link className={styles.pageLink} to="../login">

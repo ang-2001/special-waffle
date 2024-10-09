@@ -1,7 +1,7 @@
 // side bar should consist of: friends list, settings, user
 import React from 'react'
 import styles from './index.module.css'
-import { SectionHeader, SideBarContainer } from '../../utils/styles/index.styled'
+import { SectionHeader, SideBarContainer, TestButton } from '../../utils/styles/index.styled'
 import Search from './Search'
 import ChatList from './ChatList'
 
@@ -13,8 +13,12 @@ const Sidebar = () => {
         <div className={styles.friendHeader}>
           <SectionHeader>Waffler</SectionHeader>
           <div>
-            <button>add</button>
-            <button>requests</button>
+            {/* <button>add</button> */}
+            {/* <button>requests</button> */}
+            <TestButton className={styles.addButton}>
+              +
+            </TestButton>
+            <TestButton className={styles.requestsButton}>Request</TestButton>
           </div>
         </div>
       </div>

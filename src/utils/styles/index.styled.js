@@ -38,7 +38,7 @@ export const InputField = styled.input`
     border-bottom: 1px solid #d1cdbd
 `;
 
-export const SubmitButton = styled.button`
+/* export const SubmitButton = styled.button`
     width: 100%;
     outline: none;
     background-color: #8ccbb7;
@@ -62,14 +62,10 @@ export const SubmitButton = styled.button`
     &:focus {
         background-color: #fdb604;
     }
-`;
+`; */
 
 export const TestButton = styled.button`
-    width: 100%;
     outline: none;
-    border: 4px #090909 solid;
-    border-radius: 10px;
-    padding: 25px 0;
     margin: 0.5em 0 0.5em 0;
     background: linear-gradient(145deg, #171717, #444);
     box-shadow: inset 2px 2px 0px #7d7c7e,
