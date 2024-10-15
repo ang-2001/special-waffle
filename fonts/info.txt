@@ -1,2 +1,7 @@
-﻿license: Public Domain
+﻿VHS
+license: Public Domain
 link: https://www.fontspace.com/home-video-font-f116641
+
+marker
+license: Freeware, commercial use requires donation
+link: https://www.fontspace.com/write-marker-font-f94592

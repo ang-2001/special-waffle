@@ -11,13 +11,21 @@
         url("/fonts/HomeVideoBold-R90Dv.ttf") format("truetype");
 }
 
+@font-face {
+    font-family: "marker";
+    src: local("WriteMarker-mL4EV"),
+        url("/fonts/WriteMarker-mL4EV.ttf") format("truetype");
+}
+
 :root{
     --pale: #f4efdc;
     --brown: #4a3425;
     --orange: #fcb606;
     --gold: #eecf96;
+    --light-gray: #575757;
     --base-gray: #2f2f2f;
-    --dark-gray: #252525;
+    --dark-gray: #1a1a1a;
+    --darker-gray: #232428;
     --purple: #3e1d4d;
     --light-purple: #5c2b73;
     --display-blue: #bcdbf9;
@@ -42,6 +50,7 @@ body {
 
 body, html, #root {
     height: 100%;
+    overflow: hidden;
 }
 
 body, html {

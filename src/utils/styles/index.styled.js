@@ -70,16 +70,16 @@ export const TestButton = styled.button`
     background: linear-gradient(145deg, #171717, #444);
     box-shadow: inset 2px 2px 0px #7d7c7e,
     inset -2px -2px 0px #1c1c1c;
-    color: #eecf96;
+    color: var(--gold);
     font-family: 'vhs';
     font-size: 24px;
     &:hover {
         border-color: #171717;
-        background: #252525;
+        background: var(--dark-gray);
     }
     &:focus {
         border-color: #171717;
-        background: #252525;
+        background: var(--dark-gray);
     }
     &:active {
         border-color: #171717;

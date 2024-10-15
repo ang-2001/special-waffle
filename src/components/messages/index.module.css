@@ -44,7 +44,8 @@ input {
     width: 100%;
     padding: 8px;
     box-sizing: border-box;
-    background: #1d1d1d;
+    background: var(--darker-gray);
+    color: var(--gold);
     font-family: vhs;
 }
 
@@ -132,9 +133,16 @@ input {
     width: 100%;
     box-sizing: border-box;
     padding: 8px 6px;
-    color: black;
-    background: var(--pale);
-    border: none; 
+    color: var(--display-blue);
+    background: var(--purple);
+    font-family: vhs;
+    border: none;
+
+    
+}
+
+::placeholder {
+    color: var(--display-blue);
 }
 
 .chatList{
@@ -143,7 +151,7 @@ input {
     list-style-type: none;
     box-sizing: border-box;
     padding: 8px;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 
 /* container for individual user chats */
@@ -154,16 +162,29 @@ input {
     box-sizing: border-box;
     padding: 8px;
     gap: 8px;
-    background: var(--purple);
-    color: var(--display-blue);
-    text-shadow: var(--display-shadow) 2px 0 10px;
-    font-family: vhs;
+    background: var(--base-gray);
+    color: black;
+    /* text-shadow: var(--display-shadow) 2px 0 10px; */
+    font-family: marker;
+    font-weight: bold;
     border-radius: 10px;
-
-    &:hover {
-        background: var(--light-purple)
-    }
 }
+
+.chatName {
+    background: var(--pale);
+    font-family: marker;
+    font-weight: bold;
+    font-size: 24px;
+    width: 100%;
+    padding: 0 8px;
+    border-radius: 8px;
+    
+
+    /* &:hover {
+        background: var(--light-purple)
+    } */
+}
+
 
 .profileImage {
     border-radius: 50%;
