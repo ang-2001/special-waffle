@@ -123,6 +123,11 @@ input {
     border-radius: 0 10px 10px 0;
 }
 
+.powerButton {
+    aspect-ratio: 1;
+    border-radius:50%;
+}
+
 .searchField {
     width: 100%;
     box-sizing: border-box;

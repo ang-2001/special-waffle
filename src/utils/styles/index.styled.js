@@ -98,7 +98,7 @@ export const PageHeader = styled.div`
 export const SectionHeader = styled.div`
     font-family: 'vhs-bold';
     font-size: 2em;
-    color: #f4efdc;
+    color: var(--gold);
 `;
 
 // container for general page content
