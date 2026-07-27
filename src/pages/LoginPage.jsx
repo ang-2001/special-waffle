@@ -1,13 +1,12 @@
 import React from 'react'
-import LoginForm from "../components/forms/LoginForm"
-import { PageHeader, Page } from "../utils/styles/index.styled"
+import LoginForm from "../components/organisms/LoginForm/LoginForm"
+import AuthPageTemplate from "../components/templates/AuthPageTemplate"
 
 const LoginPage = () => {
   return (
-    <Page>
-      <PageHeader>Login</PageHeader>
+    <AuthPageTemplate heading="Login">
       <LoginForm />
-    </Page>
+    </AuthPageTemplate>
   )
 }
 

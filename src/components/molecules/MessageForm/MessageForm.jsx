@@ -8,7 +8,7 @@ const MessageForm = () => {
       <form  className="textWrapper">
         <input type="text" value={text} placeholder="text" onChange={e => setText(e.target.value)}/>
       </form>
-      
+
       <button className="messageBtn">Send</button>
     </div>
   )
