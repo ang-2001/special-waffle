@@ -46,8 +46,11 @@ export const typography = {
     display: "'vhs', sans-serif",
     displayBold: "'vhs-bold', sans-serif",
     body: "'Inter', sans-serif",
-    // For the readout color above — a counter/timestamp display, not prose.
-    mono: "ui-monospace, 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace",
+    // VT323: pixelated LCD/CRT-style digits, for the readout color above
+    // (a counter/timestamp display, not prose).
+    mono: "'VT323', 'Courier New', monospace",
+    // Permanent Marker: for a handwritten cassette-label treatment.
+    handwriting: "'Permanent Marker', cursive",
   },
   fontSize: {
     sm: '18px',
