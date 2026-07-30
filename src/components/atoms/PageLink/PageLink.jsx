@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 export const PageLink = styled(Link)`
     color: ${({ theme }) => theme.colors.link.default};
     text-decoration: none;
-    text-shadow: 1px ${({ theme }) => theme.colors.link.shadow};
+    text-shadow: 0 0 6px ${({ theme }) => theme.colors.link.shadow};
     &:hover {
         text-decoration: underline;
     }

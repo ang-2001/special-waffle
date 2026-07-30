@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 
-// Placeholder standing in for RegisterForm's real submit button (see the
-// commented-out Button call there). Kept as its own atom rather than merged
-// into Button until real submit logic is restored — see plan non-goals.
+// Emphasis-role button: reserved for heavier-commitment actions (currently
+// account creation), distinct from Button's primary/standard role.
 export const ButtonDark = styled.button`
     width: 100%;
     outline: none;
-    border: 4px ${({ theme }) => theme.colors.neutralDark[600]} solid;
+    border: 4px ${({ theme }) => theme.colors.neutralDark[500]} solid;
     border-radius: ${({ theme }) => theme.radii.md};
-    padding: ${({ theme }) => theme.spacing.buttonY} 0;
+    padding: ${({ theme }) => theme.spacing.lg} 0;
     margin: ${({ theme }) => theme.spacing.sm} 0;
     background: linear-gradient(
         145deg,

@@ -35,6 +35,13 @@ src/
 
 All colors, fonts, spacing, and radii live in `src/theme/tokens.js` — component styles pull from `theme.colors`/`theme.typography`/etc. rather than hardcoding values, so visual changes should generally start there.
 
+### Buttons
+
+Two button atoms exist with distinct roles, not interchangeable style variants:
+
+- `Button` — primary role, used for standard form submits (e.g. Login).
+- `ButtonDark` — emphasis role, reserved for heavier-commitment actions (currently account creation on Register).
+
 ## Known gaps
 
 This is a work in progress. Currently:
@@ -42,4 +49,3 @@ This is a work in progress. Currently:
 - Forms are styled but not wired to any backend — submit handlers exist but don't do anything yet.
 - No root (`/`) or 404 route is defined.
 - The messaging feature (`HomePage`/`Sidebar`) is a placeholder stub.
-- Referenced custom fonts (`vhs`, `vhs-bold`) expect files under `public/fonts/`, which aren't present in this checkout yet.

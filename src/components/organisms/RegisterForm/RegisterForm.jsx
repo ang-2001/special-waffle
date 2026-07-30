@@ -26,7 +26,6 @@ const RegisterForm = () => {
                 <NameFieldRow />
                 <LabeledInput id="password" label="Password" type="password" />
                 <LabeledInput id="confirmPassword" label="Confirm Password" type="password" />
-                {/* <Button>Create My Account</Button> */}
                 <ButtonDark>⏵ Create Account</ButtonDark>
                 <div>
                     <span>Already have an account? </span>
