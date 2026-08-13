@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import { Heading } from '../atoms/Heading/Heading';
 
 const Page = styled.div`
-    height: auto;
-    min-height: 100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;

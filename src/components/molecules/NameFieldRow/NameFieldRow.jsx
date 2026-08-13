@@ -6,6 +6,11 @@ const Row = styled.section`
     display: flex;
     justify-content: space-between;
     gap: 0 ${({ theme }) => theme.spacing.xs};
+
+    @media (max-width: 480px) {
+        flex-direction: column;
+        gap: ${({ theme }) => theme.spacing.xs} 0;
+    }
 `;
 
 export const NameFieldRow = ({ firstNameProps, lastNameProps }) => (

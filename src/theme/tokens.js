@@ -18,9 +18,15 @@ export const colors = {
     gold: '#fdb604',
     beige: '#d1cdbd',
     beigeShadow: '#ebd9b3',
-    // Reserved for a future error/destructive-action UI (no consumer yet).
-    // Sourced from period blank-tape packaging red, not invented.
+    // Sourced from period blank-tape packaging red, not invented. Used by
+    // RecDot; also reserved as the default for a future error/destructive
+    // UI treatment.
     recRed: '#e1202d',
+    // Color-bar stripe from classic blank-tape box art (Memorex/TDK-style
+    // rainbow spine). Decorative accent only — used sparingly as a hover
+    // sweep, never as a base UI color. red/orange/blue reuse recRed/gold/
+    // link.default so the stripe stays tied to colors already in the system.
+    rainbow: ['#e1202d', '#fdb604', '#f6e05e', '#3fa66b', '#4493ea', '#9b6fd1'],
   },
   neutralDark: {
     100: '#444',
@@ -71,11 +77,21 @@ export const spacing = {
 };
 
 export const radii = {
+  // Compact elements: controls like IconButton, and small inline badges
+  // (TapeLabel, Readout, ChatListItem's name pill) — anything short enough
+  // that md's radius would look disproportionately round on it.
   sm: '8px',
+  // The shared radius for taller content surfaces: input fields, list
+  // rows, message bubbles, search/compose inputs. Deliberately singular —
+  // these converge here rather than drifting per-component; round buttons
+  // use 50% directly, not this scale.
   md: '10px',
 };
 
 export const transitions = {
   fast: '100ms',
   base: '120ms',
+  // Deliberately slower — a visible sweep, not a snap (see ButtonDark's
+  // rainbow-stripe hover).
+  sweep: '450ms',
 };

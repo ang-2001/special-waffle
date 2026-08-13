@@ -5,6 +5,7 @@ import LandingPage from './LandingPage';
 describe('LandingPage', () => {
     it('renders without crashing', () => {
         renderWithProviders(<LandingPage />);
-        expect(screen.getByLabelText('Email')).toBeInTheDocument();
+        expect(screen.getByText('WAFFLER')).toBeInTheDocument();
+        expect(screen.getByRole('link', { name: /create account/i })).toHaveAttribute('href', '/register');
     });
 });

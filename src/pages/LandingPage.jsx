@@ -1,12 +1,11 @@
 import React from 'react'
-import RegisterForm from '../components/organisms/RegisterForm/RegisterForm'
+import LandingHero from '../components/organisms/LandingHero/LandingHero'
 import AuthPageTemplate from '../components/templates/AuthPageTemplate'
 
 const LandingPage = () => {
   return (
-    // pass a prop that specifies alignment of the page(not all pages have the same alignment)
     <AuthPageTemplate>
-      <RegisterForm />
+      <LandingHero />
     </AuthPageTemplate>
   )
 }
