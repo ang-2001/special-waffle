@@ -40,4 +40,52 @@ describe('HomePage', () => {
 
         expect(screen.queryByText('testing the compose bar')).not.toBeInTheDocument();
     });
+
+    it('sends a friend request and shows a local confirmation', async () => {
+        const user = userEvent.setup();
+        renderWithProviders(<HomePage />);
+
+        await user.click(screen.getByRole('button', { name: 'Add friend' }));
+        const input = await screen.findByPlaceholderText('Enter a username');
+
+        await user.click(screen.getByRole('button', { name: /send request/i }));
+        expect(await screen.findByText(/enter a username first/i)).toBeInTheDocument();
+
+        await user.type(input, 'zephyr');
+        await user.click(screen.getByRole('button', { name: /send request/i }));
+        expect(await screen.findByText('Request sent to zephyr.')).toBeInTheDocument();
+
+        await user.click(screen.getByRole('button', { name: /back to chats/i }));
+        expect(await screen.findByText('Waffler')).toBeInTheDocument();
+    });
+
+    it('accepts and declines friend requests locally', async () => {
+        const user = userEvent.setup();
+        renderWithProviders(<HomePage />);
+
+        await user.click(screen.getByRole('button', { name: 'Friend requests' }));
+        expect(await screen.findByText('Requests · 2')).toBeInTheDocument();
+        expect(screen.getByText('Nadia')).toBeInTheDocument();
+        expect(screen.getByText('Theo')).toBeInTheDocument();
+
+        await user.click(screen.getByRole('button', { name: 'Accept Nadia' }));
+        expect(await screen.findByText('Requests · 1')).toBeInTheDocument();
+        expect(screen.queryByText('Nadia')).not.toBeInTheDocument();
+
+        await user.click(screen.getByRole('button', { name: 'Decline Theo' }));
+        expect(await screen.findByText(/no pending requests/i)).toBeInTheDocument();
+    });
+
+    it('adds an accepted friend to the chat list and opens an empty thread for them', async () => {
+        const user = userEvent.setup();
+        renderWithProviders(<HomePage />);
+
+        await user.click(screen.getByRole('button', { name: 'Friend requests' }));
+        await user.click(await screen.findByRole('button', { name: 'Accept Nadia' }));
+        await user.click(screen.getByRole('button', { name: /back to chats/i }));
+
+        const nadiaChatEntry = await screen.findByText('Nadia');
+        await user.click(nadiaChatEntry);
+        expect(await screen.findByPlaceholderText('Message')).toBeInTheDocument();
+    });
 });

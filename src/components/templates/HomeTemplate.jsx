@@ -31,12 +31,32 @@ const HomePageContainer = styled.div`
     }
 `;
 
+// Placeholder friend list — no backend/data layer exists yet anywhere in the
+// app. Lives here (not in Sidebar) so accepting a friend request can add to
+// it and have MessageSection pick up the new friend too.
+const INITIAL_FRIENDS = [
+    { name: 'Big Beeg', preview: 'rewind that last part lol' },
+    { name: "Study Grp '99", preview: 'Nadia: meeting moved to 6' },
+    { name: 'VHS Club', preview: 'found a mint copy of Tron' },
+    { name: 'Mom', preview: 'call me when you land' },
+];
+
 const HomeTemplate = () => {
     const [selectedFriend, setSelectedFriend] = useState(null);
+    const [friends, setFriends] = useState(INITIAL_FRIENDS);
+
+    const handleAcceptFriend = (name) => {
+        setFriends((prev) => (prev.some((friend) => friend.name === name) ? prev : [...prev, { name }]));
+    };
 
     return (
         <HomePageContainer $hasSelection={Boolean(selectedFriend)}>
-            <Sidebar selectedFriend={selectedFriend} onSelectFriend={setSelectedFriend} />
+            <Sidebar
+                friends={friends}
+                selectedFriend={selectedFriend}
+                onSelectFriend={setSelectedFriend}
+                onAcceptFriend={handleAcceptFriend}
+            />
             <MessageSection friend={selectedFriend} onBack={() => setSelectedFriend(null)} />
         </HomePageContainer>
     );

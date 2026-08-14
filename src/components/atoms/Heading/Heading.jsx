@@ -10,6 +10,13 @@ const variants = {
   section: css`
     font-size: ${({ theme }) => theme.typography.fontSize.lg};
   `,
+  // Compact single-line title for a back-arrow + title row (AddFriendPanel,
+  // RequestsPanel) — section's size wraps once a count like "Requests · 12"
+  // is added, so this stays deliberately smaller and non-wrapping.
+  panel: css`
+    font-size: ${({ theme }) => theme.typography.fontSize.md};
+    white-space: nowrap;
+  `,
 };
 
 export const Heading = styled.div`

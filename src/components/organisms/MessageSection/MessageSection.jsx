@@ -97,9 +97,11 @@ const EmptyStateSub = styled.span`
 `;
 
 // Placeholder conversation seeds — no backend/data layer exists yet
-// anywhere in the app (same reasoning as Sidebar's placeholder friend
+// anywhere in the app (same reasoning as HomeTemplate's placeholder friend
 // list). Each friend starts with its own thread; sent messages are kept
 // in local component state, so they're lost on refresh/friend-switch-away.
+// Friends with no seed thread here (e.g. a newly accepted request) just
+// fall back to an empty one via `?? []` below.
 const CONTACT_STATUS = 'online';
 const INITIAL_MESSAGES = {
     'Big Beeg': [
