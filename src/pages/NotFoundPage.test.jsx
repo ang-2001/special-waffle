@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { renderWithProviders, screen } from '../test-utils';
-import LandingPage from './LandingPage';
+import NotFoundPage from './NotFoundPage';
 
 vi.mock('../lib/supabaseClient', () => ({
     supabase: {
@@ -14,10 +14,10 @@ vi.mock('../lib/supabaseClient', () => ({
     },
 }));
 
-describe('LandingPage', () => {
-    it('renders without crashing', () => {
-        renderWithProviders(<LandingPage />);
-        expect(screen.getByText('WAFFLER')).toBeInTheDocument();
-        expect(screen.getByRole('link', { name: /create account/i })).toHaveAttribute('href', '/register');
+describe('NotFoundPage', () => {
+    it('renders a way back to the app', () => {
+        renderWithProviders(<NotFoundPage />);
+        expect(screen.getByText('404')).toBeInTheDocument();
+        expect(screen.getByRole('link', { name: /back to waffler/i })).toHaveAttribute('href', '/landing');
     });
 });

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { ButtonDark } from '../ButtonDark/ButtonDark';
 import { PowerIcon } from '../PowerIcon/PowerIcon';
+import { useAuth } from '../../../hooks/useAuth';
 
 // Circular variant of ButtonDark, carried over from the pre-reorg
 // messaging-page work (main-page branch) where it sat in the Sidebar.
@@ -15,10 +16,17 @@ const CircularButtonDark = styled(ButtonDark)`
     justify-content: center;
 `;
 
-export const LogoutButton = (props) => (
-    <CircularButtonDark type="button" aria-label="Log out" {...props}>
-        <PowerIcon width="20px" height="20px" />
-    </CircularButtonDark>
-);
+// RequireAuth handles the actual redirect once the session clears — this
+// only needs to fire signOut and let AuthContext's own state change ripple
+// through, not navigate anywhere itself.
+export const LogoutButton = (props) => {
+    const { signOut } = useAuth();
+
+    return (
+        <CircularButtonDark type="button" aria-label="Log out" {...props} onClick={() => signOut()}>
+            <PowerIcon width="20px" height="20px" />
+        </CircularButtonDark>
+    );
+};
 
 export default LogoutButton;

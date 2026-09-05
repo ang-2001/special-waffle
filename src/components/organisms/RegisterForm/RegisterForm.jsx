@@ -7,6 +7,7 @@ import { PageLink } from '../../atoms/PageLink/PageLink';
 import { FieldError } from '../../atoms/FieldError/FieldError';
 import { tapeEjectMixin } from '../../atoms/TapeEject/TapeEject';
 import { useEjectNavigate } from '../../../hooks/useEjectNavigate';
+import { useAuth } from '../../../hooks/useAuth';
 
 const FormCard = styled.form`
     width: 800px;
@@ -18,13 +19,16 @@ const FormCard = styled.form`
     ${tapeEjectMixin}
 `;
 
-// component for regsiter form(page wraps arond this component)
 const RegisterForm = () => {
     const [ejecting, ejectTo] = useEjectNavigate();
+    const { signUp } = useAuth();
     const [errors, setErrors] = useState({});
+    const [submitting, setSubmitting] = useState(false);
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        if (submitting) return;
+
         const data = new FormData(event.target);
         const email = data.get('email').trim();
         const firstName = data.get('firstName').trim();
@@ -43,14 +47,38 @@ const RegisterForm = () => {
         else if (confirmPassword !== password) nextErrors.confirmPassword = "Passwords don't match.";
 
         setErrors(nextErrors);
-        if (Object.keys(nextErrors).length === 0) {
-            ejectTo('/home');
+        if (Object.keys(nextErrors).length > 0) return;
+
+        setSubmitting(true);
+        const { data: signUpData, error } = await signUp({
+            email,
+            password,
+            options: {
+                data: {
+                    display_name: `${firstName} ${lastName}`,
+                    first_name: firstName,
+                    last_name: lastName,
+                },
+            },
+        });
+        setSubmitting(false);
+
+        if (error) {
+            setErrors({ form: error.message });
+            return;
         }
+        if (!signUpData.session) {
+            // Email confirmation is on for this project — signUp succeeded
+            // but there's no session yet, so there's nothing to eject into.
+            setErrors({ form: 'Check your email to confirm your account, then log in.' });
+            return;
+        }
+
+        ejectTo('/onboarding');
     };
 
     return (
         <>
-            {/* form for creating an account */}
             <FormCard onSubmit={handleSubmit} noValidate $ejecting={ejecting}>
                 <LabeledInput id="email" name="email" label="Email" type="email" />
                 {errors.email && <FieldError>{errors.email}</FieldError>}
@@ -58,14 +86,14 @@ const RegisterForm = () => {
                     firstNameProps={{ name: 'firstName' }}
                     lastNameProps={{ name: 'lastName' }}
                 />
-                {(errors.firstName || errors.lastName) && (
-                    <FieldError>{errors.firstName || errors.lastName}</FieldError>
-                )}
+                {errors.firstName && <FieldError>{errors.firstName}</FieldError>}
+                {errors.lastName && <FieldError>{errors.lastName}</FieldError>}
                 <LabeledInput id="password" name="password" label="Password" type="password" />
                 {errors.password && <FieldError>{errors.password}</FieldError>}
                 <LabeledInput id="confirmPassword" name="confirmPassword" label="Confirm Password" type="password" />
                 {errors.confirmPassword && <FieldError>{errors.confirmPassword}</FieldError>}
-                <StreakButton>⏵ Create Account</StreakButton>
+                {errors.form && <FieldError>{errors.form}</FieldError>}
+                <StreakButton disabled={submitting}>⏵ {submitting ? 'Creating…' : 'Create Account'}</StreakButton>
                 <div>
                     <span>Already have an account? </span>
                     <PageLink to="../login">
@@ -75,8 +103,6 @@ const RegisterForm = () => {
                     </PageLink>
                 </div>
             </FormCard>
-
-            {/* value attribute = inital value of the button output */}
         </>
     )
 }
