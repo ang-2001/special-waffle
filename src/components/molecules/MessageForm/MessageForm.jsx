@@ -20,8 +20,20 @@ const ComposeInput = styled.input`
     border-radius: ${({ theme }) => theme.radii.md};
     padding: 0 ${({ theme }) => theme.spacing.md};
     font-family: ${({ theme }) => theme.typography.fontFamily.body};
-    font-size: 14px;
+    font-size: ${({ theme }) => theme.typography.fontSize.body};
     color: ${({ theme }) => theme.colors.text.onSurfaceAlt};
+    transition: all ${({ theme }) => theme.transitions.base} ease-in-out;
+
+    /* outline: none above removed the default focus ring with nothing
+       replacing it — this is the replacement, same border-left-grows
+       treatment InputContainer/SearchField already use on focus. */
+    &:hover {
+        background-color: ${({ theme }) => theme.colors.accent.beigeShadow};
+    }
+    &:focus {
+        border-left: 8px solid ${({ theme }) => theme.colors.accent.gold};
+        padding-left: calc(${({ theme }) => theme.spacing.md} - 8px);
+    }
 `;
 
 export const MessageForm = ({ onSend }) => {

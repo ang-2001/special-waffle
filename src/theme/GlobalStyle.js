@@ -26,6 +26,9 @@ export const GlobalStyle = createGlobalStyle`
         background-color: ${({ theme }) => theme.colors.background.page};
         font-family: ${({ theme }) => theme.typography.fontFamily.body};
         color: ${({ theme }) => theme.colors.text.inverse};
+        /* Inter's opsz axis reshapes glyphs by rendered size at "auto" —
+           different sizes can look like different fonts. Disabled here. */
+        font-optical-sizing: none;
     }
 
     input:-webkit-autofill,

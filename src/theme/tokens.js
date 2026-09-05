@@ -1,6 +1,4 @@
 // Design tokens: single source of truth for colors, typography, spacing, radii, transitions.
-// Values are extracted from the pre-reorg src/utils/styles/index.styled.js, index.module.css,
-// and index.css.
 
 export const colors = {
   background: {
@@ -17,15 +15,11 @@ export const colors = {
   accent: {
     gold: '#fdb604',
     beige: '#d1cdbd',
-    beigeShadow: '#ebd9b3',
-    // Sourced from period blank-tape packaging red, not invented. Used by
-    // RecDot; also reserved as the default for a future error/destructive
-    // UI treatment.
+    // Hover tint for surfaceAlt fields (inputs, pills).
+    beigeShadow: '#e2ddd0',
+    // Used by RecDot; also the default for error/destructive UI.
     recRed: '#e1202d',
-    // Color-bar stripe from classic blank-tape box art (Memorex/TDK-style
-    // rainbow spine). Decorative accent only — used sparingly as a hover
-    // sweep, never as a base UI color. red/orange/blue reuse recRed/gold/
-    // link.default so the stripe stays tied to colors already in the system.
+    // Decorative hover-sweep accent only. Reuses recRed/gold/link.default.
     rainbow: ['#e1202d', '#fdb604', '#f6e05e', '#3fa66b', '#4493ea', '#9b6fd1'],
   },
   neutralDark: {
@@ -39,8 +33,7 @@ export const colors = {
     default: '#4493ea',
     shadow: '#0277f5',
   },
-  // VFD-style counter/readout glow (teal, not red — real VCR displays were
-  // vacuum fluorescent, not LED). Reserved for a future timestamp/counter UI.
+  // VFD-style counter/readout glow.
   readout: {
     text: '#4dd9c4',
     background: '#0e1a18',
@@ -59,6 +52,11 @@ export const typography = {
     handwriting: "'Permanent Marker', cursive",
   },
   fontSize: {
+    // Secondary/supporting text: previews, statuses, hints, timestamps.
+    caption: '12px',
+    // Conversational content and label-less "pill" inputs (compose,
+    // search, add friend). sm below is for labeled form fields instead.
+    body: '14px',
     sm: '18px',
     md: '24px',
     lg: '32px',
@@ -77,14 +75,9 @@ export const spacing = {
 };
 
 export const radii = {
-  // Compact elements: controls like IconButton, and small inline badges
-  // (TapeLabel, Readout, ChatListItem's name pill) — anything short enough
-  // that md's radius would look disproportionately round on it.
+  // Compact controls and small inline badges (IconButton, TapeLabel, etc).
   sm: '8px',
-  // The shared radius for taller content surfaces: input fields, list
-  // rows, message bubbles, search/compose inputs. Deliberately singular —
-  // these converge here rather than drifting per-component; round buttons
-  // use 50% directly, not this scale.
+  // Taller content surfaces: inputs, list rows, bubbles. Round buttons use 50%, not this scale.
   md: '10px',
 };
 

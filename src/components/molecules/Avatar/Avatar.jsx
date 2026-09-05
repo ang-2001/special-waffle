@@ -10,8 +10,14 @@ const AvatarCircle = styled.span`
     border-radius: 50%;
     background-color: ${({ theme }) => theme.colors.background.surfaceAlt};
     color: ${({ theme }) => theme.colors.text.onSurfaceAlt};
-    font-family: ${({ theme }) => theme.typography.fontFamily.displayBold};
+    font-family: ${({ theme }) => theme.typography.fontFamily.body};
+    font-weight: 700;
     font-size: ${({ theme }) => theme.typography.fontSize.sm};
+    /* Static chroma-split (same red/teal pair as ChromaHover's flicker,
+       made permanent) — fringes the glyph edges without blurring them. */
+    text-shadow:
+        1.5px 0 ${({ theme }) => theme.colors.accent.recRed},
+        -1.5px 0 ${({ theme }) => theme.colors.readout.text};
 `;
 
 // Placeholder avatar until real profile images exist — renders the first
