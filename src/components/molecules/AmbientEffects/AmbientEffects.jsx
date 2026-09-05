@@ -16,9 +16,7 @@ const AmbientScanlines = styled(Scanlines)`
     opacity: 0.5;
 `;
 
-// Ambient VHS texture (scanlines/grain/vignette), mounted once at the app
-// root and fixed to the viewport, rather than duplicated inside every
-// page/screen the way the mockup's demo panels did it.
+// Ambient VHS texture, mounted once at the app root, fixed to the viewport.
 export const AmbientEffects = () => (
     <Layer>
         <Vignette />
