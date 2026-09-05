@@ -6,6 +6,8 @@ import { InputContainer } from '../../atoms/InputContainer/InputContainer';
 import { Input } from '../../atoms/Input/Input';
 import { FieldError } from '../../atoms/FieldError/FieldError';
 import { Heading } from '../../atoms/Heading/Heading';
+import { findProfileByDisplayName, getFriendshipStatus, sendFriendRequest } from '../../../lib/friends';
+import { useAuth } from '../../../hooks/useAuth';
 
 const PanelHeader = styled.div`
     display: flex;
@@ -25,7 +27,7 @@ const PanelBody = styled.div`
 const PanelHint = styled.p`
     font-family: ${({ theme }) => theme.typography.fontFamily.mono};
     color: ${({ theme }) => theme.colors.readout.text};
-    font-size: 13px;
+    font-size: ${({ theme }) => theme.typography.fontSize.caption};
     margin: 0;
 `;
 
@@ -40,45 +42,91 @@ const InlineInputContainer = styled(InputContainer)`
     margin-bottom: 0;
 `;
 
-// Strips Input's default underline + vertical margin, same as SearchField's
-// SearchInput — both are pill-style inputs sitting directly in the sidebar,
-// not the labeled, underlined fields Login/Register use.
+// Strips Input's default underline/margin — a pill input, not a labeled auth field.
 const PanelInput = styled(Input)`
     border-bottom: none;
     margin: 0;
+    font-size: ${({ theme }) => theme.typography.fontSize.body};
 `;
 
 const Confirmation = styled.p`
     font-family: ${({ theme }) => theme.typography.fontFamily.body};
     color: ${({ theme }) => theme.colors.text.onDark};
-    font-size: 13px;
+    font-size: ${({ theme }) => theme.typography.fontSize.caption};
     margin: 0;
 `;
 
-// No backend exists to actually deliver a request, so this only validates
-// and shows a local confirmation — it doesn't add anything to Requests
-// (that's the recipient's inbox) or to the friend list (accepting is the
-// other side's move, not the sender's).
+// Looks the typed name up, then inserts a pending request. A (uidA, uidB)
+// PK conflict means a row already exists — getFriendshipStatus turns that
+// into a specific message instead of a raw Postgres error.
 export const AddFriendPanel = ({ onBack }) => {
-    const [username, setUsername] = useState('');
+    const { user } = useAuth();
+    const [displayName, setDisplayName] = useState('');
     const [error, setError] = useState('');
     const [sentTo, setSentTo] = useState(null);
+    const [submitting, setSubmitting] = useState(false);
 
     const handleChange = (event) => {
-        setUsername(event.target.value);
+        setDisplayName(event.target.value);
         setSentTo(null);
     };
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const trimmed = username.trim();
+        if (submitting) return;
+
+        const trimmed = displayName.trim();
         if (!trimmed) {
-            setError('Enter a username first.');
+            setError('Enter a display name first.');
             return;
         }
+
         setError('');
-        setSentTo(trimmed);
-        setUsername('');
+        setSentTo(null);
+        setSubmitting(true);
+
+        const { data: target, error: lookupError } = await findProfileByDisplayName(trimmed);
+        if (lookupError) {
+            setSubmitting(false);
+            setError('Something went wrong looking that up — try again.');
+            return;
+        }
+        if (!target) {
+            setSubmitting(false);
+            setError(`No one goes by "${trimmed}".`);
+            return;
+        }
+        if (target.uid === user.id) {
+            setSubmitting(false);
+            setError("That's you.");
+            return;
+        }
+
+        const { error: sendError } = await sendFriendRequest(user.id, target.uid);
+        setSubmitting(false);
+
+        if (sendError) {
+            if (sendError.code === '23505') {
+                const { data: existing } = await getFriendshipStatus(user.id, target.uid);
+                if (existing?.status === 'accepted') {
+                    setError(`You're already friends with ${target.display_name}.`);
+                } else if (existing?.status === 'pending') {
+                    setError(
+                        existing.requested_by === user.id
+                            ? `You already sent ${target.display_name} a request.`
+                            : `${target.display_name} already sent you a request — check Requests.`
+                    );
+                } else {
+                    setError(`Can't send ${target.display_name} a request right now.`);
+                }
+            } else {
+                setError(sendError.message);
+            }
+            return;
+        }
+
+        setDisplayName('');
+        setSentTo(target.display_name);
     };
 
     return (
@@ -88,12 +136,12 @@ export const AddFriendPanel = ({ onBack }) => {
                 <Heading variant="panel">Add friend</Heading>
             </PanelHeader>
             <PanelBody>
-                <PanelHint>▶ send a request by username</PanelHint>
+                <PanelHint>▶ send a request by display name</PanelHint>
                 <SendRow onSubmit={handleSubmit} noValidate>
                     <InlineInputContainer>
-                        <PanelInput placeholder="Enter a username" value={username} onChange={handleChange} />
+                        <PanelInput placeholder="Enter a display name" value={displayName} onChange={handleChange} />
                     </InlineInputContainer>
-                    <CircularButton type="submit" aria-label="Send request">⏵</CircularButton>
+                    <CircularButton type="submit" aria-label="Send request" disabled={submitting}>⏵</CircularButton>
                 </SendRow>
                 {error && <FieldError>{error}</FieldError>}
                 {sentTo && <Confirmation>Request sent to {sentTo}.</Confirmation>}

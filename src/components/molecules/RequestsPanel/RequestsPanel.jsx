@@ -3,6 +3,7 @@ import { IconButton } from '../../atoms/IconButton/IconButton';
 import { Heading } from '../../atoms/Heading/Heading';
 import { Avatar } from '../Avatar/Avatar';
 import { ButtonDark } from '../../atoms/ButtonDark/ButtonDark';
+import { FieldError } from '../../atoms/FieldError/FieldError';
 
 const PanelHeader = styled.div`
     display: flex;
@@ -33,7 +34,7 @@ const RequestName = styled.span`
     flex: 1;
     font-family: ${({ theme }) => theme.typography.fontFamily.body};
     color: ${({ theme }) => theme.colors.text.onDark};
-    font-size: 13px;
+    font-size: ${({ theme }) => theme.typography.fontSize.caption};
 `;
 
 const RequestActions = styled.div`
@@ -41,9 +42,7 @@ const RequestActions = styled.div`
     gap: ${({ theme }) => theme.spacing.xxs};
 `;
 
-// Small paired-action variant of ButtonDark, sized between IconButton (40px,
-// paired header actions) and CircularButton (48px, single standalone
-// action) — these are paired but inline within a compact row.
+// Small paired-action variant of ButtonDark, sized between IconButton (40px) and CircularButton (48px).
 const RequestActionButton = styled(ButtonDark)`
     width: 32px;
     height: 32px;
@@ -53,44 +52,45 @@ const RequestActionButton = styled(ButtonDark)`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    font-size: 13px;
+    font-size: ${({ theme }) => theme.typography.fontSize.caption};
 `;
 
 const EmptyHint = styled.p`
     font-family: ${({ theme }) => theme.typography.fontFamily.mono};
     color: ${({ theme }) => theme.colors.neutralDark.highlight};
-    font-size: 13px;
+    font-size: ${({ theme }) => theme.typography.fontSize.caption};
 `;
 
-// Decline only ever mutates Sidebar's local `requests` state. Accept also
-// bubbles the name up to HomeTemplate (via Sidebar's onAcceptFriend) so the
-// new friend shows up in the chat list — MessageSection picks it up for
-// free since it already falls back to an empty thread for any friend name
-// it doesn't have seed messages for.
-export const RequestsPanel = ({ requests, onBack, onAccept, onDecline }) => (
+// `request` is { uidA, uidB, otherId, name, requestedAt } (see lib/friends.js).
+export const RequestsPanel = ({ requests, loading, error, respondingId, onBack, onAccept, onDecline }) => (
     <>
         <PanelHeader>
             <IconButton type="button" aria-label="Back to chats" onClick={onBack}>←</IconButton>
             <Heading variant="panel">{requests.length > 0 ? `Requests · ${requests.length}` : 'Requests'}</Heading>
         </PanelHeader>
         <PanelBody>
-            {requests.length === 0 && <EmptyHint>▶ no pending requests</EmptyHint>}
+            {error && <FieldError>{error}</FieldError>}
+            {/* Only the true first load takes over the body — a revalidating reopen keeps the existing list. */}
+            {loading && requests.length === 0 && <EmptyHint>▶ loading requests…</EmptyHint>}
+            {!loading && requests.length === 0 && !error && <EmptyHint>▶ no pending requests</EmptyHint>}
             {requests.map((request) => (
-                <RequestRow key={request.id}>
+                <RequestRow key={request.otherId}>
                     <Avatar name={request.name} />
                     <RequestName>{request.name}</RequestName>
                     <RequestActions>
                         <RequestActionButton
                             type="button"
                             aria-label={`Accept ${request.name}`}
-                            onClick={() => onAccept(request.id, request.name)}
+                            disabled={respondingId === request.otherId}
+                            onClick={() => onAccept(request)}
                         >
                             ✓
                         </RequestActionButton>
                         <RequestActionButton
                             type="button"
                             aria-label={`Decline ${request.name}`}
-                            onClick={() => onDecline(request.id)}
+                            disabled={respondingId === request.otherId}
+                            onClick={() => onDecline(request)}
                         >
                             ✕
                         </RequestActionButton>
