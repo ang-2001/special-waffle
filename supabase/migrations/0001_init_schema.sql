@@ -412,15 +412,10 @@ create policy "users can view chats they participate in"
     )
   );
 
-create policy "participants can update a chat (e.g. rename a group)"
-  on chats for update
-  to authenticated
-  using (
-    exists (
-      select 1 from chat_participants cp
-      where cp.chat_id = chats.chat_id and cp.uid = auth.uid()
-    )
-  );
+-- No update policy or grant — rename_chat is the only way to change a chat
+-- row, and being SECURITY DEFINER it doesn't need one. A direct grant here
+-- would let a participant PATCH last_message_preview/last_message_at/
+-- created_at straight through PostgREST, bypassing that function entirely.
 
 alter table chat_participants enable row level security;
 
@@ -465,7 +460,7 @@ create policy "users can send messages to their own chats"
 
 grant select, update on profiles to authenticated;
 grant select, insert, update, delete on friendships to authenticated;
-grant select, update on chats to authenticated;
+grant select on chats to authenticated;
 grant select on chat_participants to authenticated;
 grant select, insert on messages to authenticated;
 
