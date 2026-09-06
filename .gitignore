@@ -9,10 +9,16 @@
 /coverage
 
 # production
-/build
+/dist
 
 # misc
 .DS_Store
+
+# env files — keep this broad (catch-all + explicit exception) rather than
+# relying on naming every .env variant by hand
+.env
+.env.*
+!.env.example
 .env.local
 .env.development.local
 .env.test.local
