@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { v7 as uuidv7 } from 'uuid';
 import { Avatar } from '../../molecules/Avatar/Avatar';
@@ -323,6 +323,15 @@ const formatElapsed = (ms) => {
 const formatTime = (isoString) =>
     new Date(isoString).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
 
+// Consecutive messages from one sender form a run (one avatar, one
+// timestamp) unless there's a long enough pause between them.
+const GROUP_WINDOW_MS = 5 * 60 * 1000;
+const continuesRun = (prev, message) =>
+    !!prev &&
+    !!message &&
+    prev.sender_id === message.sender_id &&
+    new Date(message.sent_at) - new Date(prev.sent_at) < GROUP_WINDOW_MS;
+
 // Idempotent upsert by message_id — used for both our own insert response
 // and a realtime echo of it.
 const upsertRow = (rows, row) => {
@@ -411,6 +420,12 @@ const MessageSection = ({
     }, [paneView, userId]);
 
     const participantIds = new Set((participants ?? []).map((p) => p.uid));
+    // Sender lookup for message avatars. Someone who has since left isn't in
+    // participants, so their avatar falls back to "?".
+    const nameById = useMemo(
+        () => new Map((participants ?? []).map((p) => [p.uid, p.name])),
+        [participants]
+    );
     const addableFriends = addFriends.filter((f) => !participantIds.has(f.uid));
 
     const handleAddPeopleConfirm = async (selectedFriends) => {
@@ -650,14 +665,15 @@ const MessageSection = ({
             )}
             {!loading && !error && messages.length > 0 && (
                 <MessageList>
-                    {messages.map((message) => (
+                    {messages.map((message, i) => (
                         <Message
                             key={message.message_id}
-                            name={chatName}
+                            name={nameById.get(message.sender_id)}
                             text={message.content}
-                            time={formatTime(message.sent_at)}
+                            time={continuesRun(message, messages[i + 1]) ? null : formatTime(message.sent_at)}
                             own={message.sender_id === userId}
                             pending={message.pending}
+                            grouped={continuesRun(messages[i - 1], message)}
                         />
                     ))}
                 </MessageList>
