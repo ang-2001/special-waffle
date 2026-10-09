@@ -8,6 +8,14 @@ const Row = styled.div`
     max-width: 70%;
     align-self: ${({ $own }) => ($own ? 'flex-end' : 'flex-start')};
     flex-direction: ${({ $own }) => ($own ? 'row-reverse' : 'row')};
+    /* Pull follow-ups in a run up under the first, cancelling most of the list gap. */
+    margin-top: ${({ theme, $grouped }) => ($grouped ? `calc(${theme.spacing.xxs} - ${theme.spacing.sm})` : 0)};
+`;
+
+// Holds the avatar's width on follow-up messages so bubbles stay aligned.
+const AvatarSpacer = styled.span`
+    width: 28px;
+    flex: none;
 `;
 
 const Bubble = styled.div`
@@ -34,9 +42,11 @@ const Time = styled.span`
 
 const smallAvatarStyle = { width: 28, height: 28, fontSize: 13 };
 
-export const Message = ({ name, text, time, own, pending }) => (
-    <Row $own={own}>
-        {!own && <Avatar name={name} style={smallAvatarStyle} />}
+// `grouped`: follows a message from the same sender, so it drops the avatar
+// and sits closer to the one above.
+export const Message = ({ name, text, time, own, pending, grouped = false }) => (
+    <Row $own={own} $grouped={grouped}>
+        {!own && (grouped ? <AvatarSpacer /> : <Avatar name={name} style={smallAvatarStyle} />)}
         <div>
             <Bubble $own={own} $pending={pending}>{text}</Bubble>
             {time && <Time>{time}</Time>}
